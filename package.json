@@ -1,0 +1,107 @@
+{
+  "name": "markola",
+  "version": "1.0.0",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "dev:electron": "NODE_ENV=dev electron .",
+    "start": "NODE_ENV=pro electron .",
+    "build": "vite build && electron-builder --mac --win --linux",
+    "build:electron": "electron-builder",
+    "build:mac": "npm run build:mac:x64 && npm run build:mac:arm64",
+    "build:mac:x64": "electron-builder --mac --x64",
+    "build:mac:arm64": "electron-builder --mac --arm64",
+    "build:mac:universal": "electron-builder --mac --universal",
+    "build:win": "electron-builder --win",
+    "build:linux:x64": "electron-builder --linux --64",
+    "build:linux:arm64": "electron-builder --linux --arm64",
+    "build:linux:universal": "electron-builder --linux --universal"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@tiptap/extension-blockquote": "^2.11.5",
+    "@tiptap/extension-character-count": "^2.11.5",
+    "@tiptap/extension-code-block": "^2.11.5",
+    "@tiptap/extension-code-block-lowlight": "^2.11.5",
+    "@tiptap/extension-color": "^2.11.5",
+    "@tiptap/extension-highlight": "^2.11.5",
+    "@tiptap/extension-horizontal-rule": "^2.11.5",
+    "@tiptap/extension-image": "^2.11.5",
+    "@tiptap/extension-link": "^2.11.5",
+    "@tiptap/extension-list-item": "^2.11.5",
+    "@tiptap/extension-mention": "^2.11.5",
+    "@tiptap/extension-strike": "^2.11.5",
+    "@tiptap/extension-table": "^2.11.5",
+    "@tiptap/extension-table-cell": "^2.11.5",
+    "@tiptap/extension-table-header": "^2.11.5",
+    "@tiptap/extension-table-row": "^2.11.5",
+    "@tiptap/extension-task-item": "^2.11.5",
+    "@tiptap/extension-task-list": "^2.11.5",
+    "@tiptap/extension-text-align": "^2.11.5",
+    "@tiptap/extension-text-style": "^2.11.5",
+    "@tiptap/extension-underline": "^2.11.5",
+    "@tiptap/react": "^2.11.5",
+    "@tiptap/starter-kit": "^2.11.5",
+    "fabric": "^4.6.0",
+    "framer-motion": "^12.5.0",
+    "html2pdf.js": "^0.10.3",
+    "jspdf": "^3.0.0",
+    "konva": "^9.3.6",
+    "lodash": "^4.17.21",
+    "lowlight": "^2.9.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-draggable": "^4.4.6",
+    "react-icons": "^5.5.0",
+    "react-konva": "^18.2.10",
+    "react-lottie": "^1.2.10",
+    "react-particles": "^2.12.2",
+    "tiptap-markdown": "^0.8.10",
+    "tsparticles-slim": "^2.12.0",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "electron": "^20.0.0",
+    "electron-builder": "^25.1.8",
+    "electron-icon-maker": "^0.0.5",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "vite": "^5.4.9"
+  },
+  "build": {
+    "appId": "com.roloo.markola",
+    "productName": "Markola",
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ],
+    "directories": {
+      "buildResources": "build",
+      "output": "release"
+    },
+    "mac": {
+      "icon": "build/icons/mac/icon.icns",
+      "target": "dmg",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "win": {
+      "icon": "build/icons/win/icon.ico",
+      "target": "nsis",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "linux": {
+      "icon": "build/icons/png",
+      "target": ["AppImage", "deb"],
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "desktop": {
+        "Name": "Markola",
+        "Icon": "icon",
+        "Type": "Application",
+        "Categories": "Utility"
+      }
+    }
+  }
+}

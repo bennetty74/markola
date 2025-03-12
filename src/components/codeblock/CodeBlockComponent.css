@@ -1,0 +1,12 @@
+/* Code block styles */
+.tiptap .code-block {
+  position: relative;
+}
+
+.tiptap .code-block select {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  color: #ecec;
+  background-color: #081c15;
+}
