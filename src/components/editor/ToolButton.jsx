@@ -1,10 +1,11 @@
 import React from 'react';
 
-const ToolButton = ({ onClick, isActive, title, children, className = '' }) => (
+const ToolButton = React.forwardRef(({ onClick, isActive, title, children, className = '' }, ref) => (
   <button
     onClick={onClick}
     className={`p-1.5 relative text-gray-600 dark:text-gray-300 hover:text-gray-500 transition-colors duration-200 ${className}`}
     title={title}
+    ref={ref}
   >
     {children}
     <span
@@ -13,6 +14,6 @@ const ToolButton = ({ onClick, isActive, title, children, className = '' }) => (
       } origin-center transition-transform duration-200`}
     />
   </button>
-);
+));
 
 export default ToolButton;

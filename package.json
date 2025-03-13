@@ -15,9 +15,10 @@
     "build:mac:arm64": "electron-builder --mac --arm64",
     "build:mac:universal": "electron-builder --mac --universal",
     "build:win": "electron-builder --win",
-    "build:linux:x64": "electron-builder --linux --64",
+    "build:linux:x64": "electron-builder --linux --x64",
     "build:linux:arm64": "electron-builder --linux --arm64",
-    "build:linux:universal": "electron-builder --linux --universal"
+    "build:linux:universal": "electron-builder --linux --universal",
+    "build:linux": "electron-builder --linux --x64 && electron-builder --linux --arm64"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -97,6 +98,7 @@
     "linux": {
       "icon": "build/icons/png",
       "target": ["AppImage", "deb"],
+      "category": "Utility",
       "artifactName": "${productName}-${version}-${arch}.${ext}",
       "desktop": {
         "Name": "Markola",

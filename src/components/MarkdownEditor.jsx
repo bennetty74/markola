@@ -25,6 +25,7 @@ import { lowlight } from "lowlight";
 import Toolbar from "./EditorToolbar.jsx";
 import CodeBlockComponent from "./codeblock/CodeBlockComponent.jsx";
 import ImageUploadComponent from "./image/ImageUploadComponent.jsx";
+import debounce from 'lodash/debounce';
 import {
   TrashIcon,
   ArrowUpIcon,
@@ -125,21 +126,22 @@ function MarkdownEditor({ onContentChange, initialContent, theme, setSelectedFil
     },
   });
 
+  const updateContent = debounce((content, currentEditor) => {
+    if (content !== lastContentRef.current) {
+      console.log("Loading initialContent:", content);
+      const currentPos = currentEditor.state.selection.anchor;
+      currentEditor.commands.setContent(content, false, { preserveCursor: true });
+      currentEditor.commands.setTextSelection(currentPos);
+      lastContentRef.current = content;
+    }
+  }, 100);
+
   // 初始化或外部内容变化时更新编辑器内容
   useEffect(() => {
-    if (
-      editor &&
-      initialContent !== undefined &&
-      initialContent !== lastContentRef.current
-    ) {
-      console.log("Loading initialContent:", initialContent);
-      const currentPos = editor.state.selection.anchor; // 保存当前光标位置
-      editor.commands.setContent(initialContent, false, {
-        preserveCursor: true,
-      });
-      editor.commands.setTextSelection(currentPos); // 恢复光标位置
-      lastContentRef.current = initialContent;
+    if (editor && initialContent !== undefined) {
+      updateContent(initialContent, editor);
     }
+    return () => updateContent.cancel(); // 清理防抖
   }, [editor, initialContent]);
 
   const handleContextMenu = (event) => {

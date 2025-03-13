@@ -1,10 +1,10 @@
-import React from 'react';
+import Reac, { useRef, useEffect } from "react";
 import {
   FolderIcon,
   DocumentIcon,
   EllipsisHorizontalIcon,
-} from '@heroicons/react/24/outline';
-import ContextMenu from './ContextMenu';
+} from "@heroicons/react/24/outline";
+import ContextMenu from "./ContextMenu";
 
 const TreeNode = ({
   item,
@@ -18,6 +18,7 @@ const TreeNode = ({
   renamingId,
   newItemName,
   setNewItemName,
+  startRename,
   confirmRename,
   cancelRename,
   startNewItem,
@@ -32,10 +33,25 @@ const TreeNode = ({
   const isRenaming = renamingId === item.id;
   const isExpanded = expandedFolders.has(item.id);
   const isSelected = selectedFile?.id === item.id;
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        showDropdown === item.id
+      ) {
+        setShowDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showDropdown, item.id, setShowDropdown]);
 
   return (
     <li className={`pl-${level * 4}`}>
-      {item.type === 'folder' ? (
+      {item.type === "folder" ? (
         <div className="relative">
           {isRenaming ? (
             <div className="flex items-center">
@@ -46,8 +62,8 @@ const TreeNode = ({
                 onChange={(e) => setNewItemName(e.target.value)}
                 onBlur={() => confirmRename(item.id)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') confirmRename(item.id);
-                  if (e.key === 'Escape') cancelRename();
+                  if (e.key === "Enter") confirmRename(item.id);
+                  if (e.key === "Escape") cancelRename();
                 }}
                 className="w-full p-1 rounded bg-gray-200 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 autoFocus
@@ -70,15 +86,17 @@ const TreeNode = ({
             </div>
           )}
           {showDropdown === item.id && (
-            <ContextMenu
-              item={item}
-              startNewItem={startNewItem}
-              startRename={startRename}
-              deleteItem={deleteItem}
-              exportToPDF={exportToPDF}
-              exportToHTML={exportToHTML}
-              isExporting={isExporting}
-            />
+            <div ref={dropdownRef}>
+              <ContextMenu
+                item={item}
+                startNewItem={startNewItem}
+                startRename={startRename}
+                deleteItem={deleteItem}
+                exportToPDF={exportToPDF}
+                exportToHTML={exportToHTML}
+                isExporting={isExporting}
+              />
+            </div>
           )}
           {isExpanded && (
             <ul>
@@ -89,7 +107,7 @@ const TreeNode = ({
                     value={newItemName}
                     onChange={(e) => setNewItemName(e.target.value)}
                     onBlur={confirmNewItem}
-                    onKeyDown={(e) => e.key === 'Enter' && confirmNewItem()}
+                    onKeyDown={(e) => e.key === "Enter" && confirmNewItem()}
                     placeholder={`新建名称`}
                     className="w-full p-1 rounded bg-gray-200 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     autoFocus
@@ -136,8 +154,8 @@ const TreeNode = ({
                 onChange={(e) => setNewItemName(e.target.value)}
                 onBlur={() => confirmRename(item.id)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') confirmRename(item.id);
-                  if (e.key === 'Escape') cancelRename();
+                  if (e.key === "Enter") confirmRename(item.id);
+                  if (e.key === "Escape") cancelRename();
                 }}
                 className="w-full p-1 rounded bg-gray-200 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 autoFocus
@@ -146,7 +164,7 @@ const TreeNode = ({
           ) : (
             <div
               className={`flex items-center cursor-pointer hover:bg-gray-700 hover:text-white rounded px-2 py-1 transition-colors ${
-                isSelected ? 'bg-gray-600 text-white' : ''
+                isSelected ? "bg-gray-600 text-white" : ""
               }`}
             >
               <DocumentIcon className="w-5 h-5 mr-2" />
@@ -165,7 +183,8 @@ const TreeNode = ({
             </div>
           )}
           {showDropdown === item.id && (
-            <ContextMenu
+            <div ref={dropdownRef}>
+              <ContextMenu
               item={item}
               startNewItem={startNewItem}
               startRename={startRename}
@@ -174,6 +193,7 @@ const TreeNode = ({
               exportToHTML={exportToHTML}
               isExporting={isExporting}
             />
+            </div>
           )}
         </div>
       )}

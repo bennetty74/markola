@@ -164,7 +164,7 @@ function NotebookSidebar({
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [showDropdown]);
 
   // 搜索过滤
   const filterTree = (items, query) =>
@@ -184,7 +184,7 @@ function NotebookSidebar({
   const filteredTree = searchQuery ? filterTree(tree, searchQuery) : tree;
 
   return (
-    <div className="w-full h-full p-4 relative">
+    <div className="w-full h-full p-4 relative" ref={dropdownRef}>
       <SidebarHeader
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -221,6 +221,7 @@ function NotebookSidebar({
             renamingId={renamingId}
             newItemName={newItemName}
             setNewItemName={setNewItemName}
+            startRename={startRename}
             confirmRename={confirmRename}
             cancelRename={cancelRename}
             startNewItem={startNewItem}
