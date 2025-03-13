@@ -131,7 +131,7 @@ function Toolbar({ editor, theme, setSelectedFile }) {
     editor
     .chain()
     .focus()
-    .insertMath({ latex: '\\sum_{i=0}^n i^2' }) // 使用自定义命令
+    .insertMathBlock({ latex: '\\sum_{i=0}^n i^2' }) // 使用自定义命令
     .run();
   }
 
