@@ -315,3 +315,13 @@ body {
   font-weight: 700;
 }
 
+.math-node.inline {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.2em;
+}
+
+.math-node.block {
+  display: block;
+  margin: 0.5em 0;
+}

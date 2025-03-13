@@ -23,6 +23,7 @@ import {
   MinusIcon,
   CheckCircleIcon,
   ArrowLeftStartOnRectangleIcon,
+  VariableIcon
 } from '@heroicons/react/24/outline';
 import { RxTextAlignCenter, RxHeading } from 'react-icons/rx';
 import ToolButton from './editor/ToolButton';
@@ -121,6 +122,18 @@ function Toolbar({ editor, theme, setSelectedFile }) {
     { name: '绿色', value: '#89AC46' },
     { name: '灰色', value: '#ADB2D4' },
   ];
+  
+  const insertMath = () => {
+    if (!editor) {
+      console.error('Editor 未初始化');
+      return;
+    }
+    editor
+    .chain()
+    .focus()
+    .insertMath({ latex: '\\sum_{i=0}^n i^2' }) // 使用自定义命令
+    .run();
+  }
 
   return (
     <div className="toolbar w-full h-[58px] fixed top-[45px] z-50 bg-gray-100 dark:bg-gray-900 flex flex-wrap gap-1.5 px-2 py-1 shadow-md border-b border-gray-300 dark:border-gray-700">
@@ -356,9 +369,12 @@ function Toolbar({ editor, theme, setSelectedFile }) {
           </div>
         </Dropdown>
       </div>
-
       <ToolButton onClick={addImage} isActive={editor.isActive('image')} title="图片">
         <PhotoIcon className="w-5 h-5" />
+      </ToolButton>
+
+      <ToolButton onClick={insertMath} isActive={editor.isActive('math')} title="数学公式">
+        <VariableIcon className="w-5 h-5" />
       </ToolButton>
 
       <ToolButton onClick={exitEdit} isActive={editor.isActive('exit')} title="退出编辑">

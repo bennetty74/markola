@@ -33,6 +33,8 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
+import 'katex/dist/katex.min.css';
+import {MathBlock, MathInline} from './math/MathNode';
 
 function MarkdownEditor({ onContentChange, initialContent, theme, setSelectedFile }) {
   const [contextMenu, setContextMenu] = useState(null);
@@ -46,7 +48,8 @@ function MarkdownEditor({ onContentChange, initialContent, theme, setSelectedFil
         bulletList: true,
         orderedList: true,
       }),
-      // CanvasNode,
+      MathBlock, // 块级公式
+      MathInline, // 行内公式,
       Markdown.configure({
         html: true,
         transformPastedText: true,
