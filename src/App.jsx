@@ -81,6 +81,7 @@ function App() {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+    console.log("clicked")
   };
 
   const particlesInit = async (engine) => {
@@ -122,17 +123,16 @@ function App() {
 
   return (
     <div
-      className={`flex flex-col h-screen bg-gray-100 dark:bg-gray-900 dark:text-white`}
+      className={`flex flex-col h-screen bg-gray-200 dark:bg-gray-900 dark:text-white`}
     >
+      {/* 顶部栏保持不变 */}
       <div
-        className={`flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 select-none`}
+        className={`flex items-center justify-between px-4 py-2 bg-gray-200 dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 select-none`}
         style={{ WebkitAppRegion: "drag" }}
       >
         <div className="flex items-center">
           <span className="text-lg font-semibold">Markola</span>
         </div>
-
-        {/* Lottie 动画 */}
         {selectedFile && (
           <div className="w-auto h-6 flex items-center justify-center">
             <Lottie
@@ -143,19 +143,19 @@ function App() {
             />
           </div>
         )}
-
         <WindowControls
           minimizeWindow={minimizeWindow}
           maximizeWindow={maximizeWindow}
           closeWindow={closeWindow}
         />
       </div>
-      <div className="flex flex-1 overflow-hidden">
+
+      <div className="flex flex-1 overflow-hidden relative">
         {/* 侧边栏 */}
         <div
           className={`${
-            isSidebarOpen ? "w-1/5" : "w-12"
-          } h-full bg-gray-100 dark:bg-gray-900 dark:text-white overflow-y-auto border-r border-gray-300 scrollbar-hide transition-all duration-300 flex flex-col`}
+            isSidebarOpen ? "w-1/5 border-r border-gray-300" : "w-0"
+          } h-full bg-gray-200 dark:bg-gray-900 dark:text-white overflow-y-auto scrollbar-hide transition-all duration-300`}
         >
           {isSidebarOpen && (
             <NotebookSidebar
@@ -167,25 +167,27 @@ function App() {
               setTree={setTree}
             />
           )}
-          {/* 展开/收起按钮，放在侧边栏底部 */}
-          <div className="mt-auto p-2 flex justify-end">
-            <button
-              onClick={toggleSidebar}
-              className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
-              title={isSidebarOpen ? "收起侧边栏" : "展开侧边栏"}
-            >
-              {isSidebarOpen ? (
-                <ChevronLeftIcon className="w-6 h-6 text-gray-600 dark:text-gray-400" />
-              ) : (
-                <ChevronRightIcon className="w-6 h-6 text-gray-600 dark:text-gray-400" />
-              )}
-            </button>
-          </div>
         </div>
+
+        {/* 独立的展开/收起按钮 */}
+        <div className="absolute bottom-2 left-2 z-50">
+          <button
+            onClick={toggleSidebar}
+            className="p-1 rounded-full shadow-lg hover:bg-gray-300 dark:hover:bg-gray-800 transition-colors bg-gray-200 dark:bg-gray-900"
+            title={isSidebarOpen ? "收起侧边栏" : "展开侧边栏"}
+          >
+            {isSidebarOpen ? (
+              <ChevronLeftIcon className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+            ) : (
+              <ChevronRightIcon className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+            )}
+          </button>
+        </div>
+
         {/* 主内容区域 */}
         <div
           className={`${
-            isSidebarOpen ? "w-4/5" : "w-[calc(100%-3rem)]"
+            isSidebarOpen ? "w-4/5" : "w-full"
           } h-full overflow-y-auto shadow-lg scrollbar-hide relative transition-all duration-300`}
         >
           {selectedFile ? (

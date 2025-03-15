@@ -52,14 +52,14 @@ const MathComponent = ({ node, updateAttributes, selected }) => {
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
           autoFocus
-          className="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-black dark:text-white"
+          className="w-full p-2 border rounded bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
           placeholder="输入 LaTeX 公式"
         />
       ) : (
         <div
           onDoubleClick={() => setIsEditing(true)}
           dangerouslySetInnerHTML={renderLatex()}
-          className={`cursor-pointer p-2 rounded ${isInline ? 'inline-block' : 'block'} bg-gray-100 dark:bg-gray-800`}
+          className={`cursor-pointer p-2 rounded ${isInline ? 'inline-block' : 'block'} bg-gray-200 dark:bg-gray-800`}
         />
       )}
     </NodeViewWrapper>

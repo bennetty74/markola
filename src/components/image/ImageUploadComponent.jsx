@@ -48,7 +48,7 @@ const ImageUploadComponent = ({ node, updateAttributes }) => {
     <NodeViewWrapper>
       {isPlaceholder ? (
         <div
-          className="border-2 border-dashed border-gray-400 p-4 text-center cursor-pointer bg-gray-100 hover:bg-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300"
+          className="border-2 border-dashed border-gray-400 p-4 text-center cursor-pointer bg-gray-200 hover:bg-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300"
           onClick={handleClick}
         >
           <p>Click to upload an image</p>

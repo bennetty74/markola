@@ -136,7 +136,7 @@ function Toolbar({ editor, theme, setSelectedFile }) {
   }
 
   return (
-    <div className="toolbar w-full h-[58px] fixed top-[45px] z-50 bg-gray-100 dark:bg-gray-900 flex flex-wrap gap-1.5 px-2 py-1 shadow-md border-b border-gray-300 dark:border-gray-700">
+    <div className="toolbar w-full h-[58px] fixed top-[45px] z-50 bg-gray-200 dark:bg-gray-900 flex flex-wrap gap-1.5 px-2 py-1 shadow-md border-b border-gray-300 dark:border-gray-700">
       <ToolButton onClick={() => editor.chain().focus().undo().run()} title="撤销">
         <ArrowUturnLeftIcon className="w-5 h-5" />
       </ToolButton>
@@ -164,7 +164,7 @@ function Toolbar({ editor, theme, setSelectedFile }) {
               className={`w-full text-left px-2 py-1 rounded-md ${
                 editor.isActive('heading', { level })
                   ? 'bg-gray-800 text-white'
-                  : 'hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300'
+                  : 'hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300'
               } transition-colors`}
             >
               {level}级标题
@@ -258,7 +258,7 @@ function Toolbar({ editor, theme, setSelectedFile }) {
               <button
                 key={color.value}
                 onClick={() => setTextColor(color.value)}
-                className="flex items-center w-full px-2 py-1 text-left hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition-colors"
+                className="flex items-center w-full px-2 py-1 text-left hover:bg-gray-300 dark:hover:bg-gray-600 rounded-md transition-colors"
               >
                 <span
                   className="w-4 h-4 mr-2 rounded-full"
@@ -340,7 +340,7 @@ function Toolbar({ editor, theme, setSelectedFile }) {
               value={linkTitle}
               onChange={(e) => setLinkTitle(e.target.value)}
               placeholder="链接标题"
-              className="w-full p-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none"
+              className="w-full p-1 rounded bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none"
             />
           </div>
           <div className="mb-2">
@@ -350,13 +350,13 @@ function Toolbar({ editor, theme, setSelectedFile }) {
               value={linkUrl}
               onChange={(e) => setLinkUrl(e.target.value)}
               placeholder="https://example.com"
-              className="w-full p-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none"
+              className="w-full p-1 rounded bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none"
             />
           </div>
           <div className="flex justify-end gap-2">
             <button
               onClick={() => setIsLinkOpen(false)}
-              className="px-2 py-1 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition-colors"
+              className="px-2 py-1 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-md transition-colors"
             >
               取消
             </button>

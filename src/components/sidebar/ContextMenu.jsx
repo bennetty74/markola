@@ -16,7 +16,7 @@ const ContextMenu = ({
   isExporting,
 }) => {
   return (
-    <div className="absolute left-0 top-full mt-1 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-lg z-50 w-40">
+    <div className="absolute left-0 top-full mt-1 bg-gray-200 dark:bg-gray-700 rounded-lg shadow-lg z-50 w-40">
       {item.type === 'folder' && (
         <>
           <button

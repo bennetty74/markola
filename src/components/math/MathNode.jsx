@@ -27,7 +27,7 @@ const MathInline = Node.create({
   parseHTML() {
     return [
       {
-        tag: 'span[data-type="mathInline"]', // 使用 span 表示行内
+        tag: 'span[data-type="mathInline"]', 
       },
     ];
   },
