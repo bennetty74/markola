@@ -1,9 +1,11 @@
 {
   "name": "markola",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "electron/main.js",
-  "author": {"name":"bennetty74", "email": "bennetty74@gmail.com"},
-  
+  "author": {
+    "name": "bennetty74",
+    "email": "bennetty74@gmail.com"
+  },
   "scripts": {
     "dev": "vite",
     "dev:electron": "NODE_ENV=dev electron .",
@@ -49,6 +51,7 @@
     "framer-motion": "^12.5.0",
     "html2pdf.js": "^0.10.3",
     "jspdf": "^3.0.0",
+    "katex": "^0.16.21",
     "konva": "^9.3.6",
     "lodash": "^4.17.21",
     "lowlight": "^2.9.0",
@@ -97,7 +100,10 @@
     },
     "linux": {
       "icon": "build/icons/png",
-      "target": ["AppImage", "deb"],
+      "target": [
+        "AppImage",
+        "deb"
+      ],
       "category": "Utility",
       "artifactName": "${productName}-${version}-${arch}.${ext}",
       "desktop": {

@@ -204,7 +204,7 @@ body {
 .tiptap ul,
 .tiptap ol {
   padding: 0 1rem;
-  margin: 1.25rem 1rem 1.25rem 0.4rem;
+  margin: 0.5rem;
 }
 
 .tiptap ul li p,
@@ -250,7 +250,7 @@ body {
   border-radius: 0.5rem;
   color: #d8f3dc;
   font-family: "JetBrainsMono", monospace;
-  margin: 1.5rem 0;
+  margin: 0.8rem 0;
   padding: 0.75rem 1rem;
 }
 
@@ -315,3 +315,13 @@ body {
   font-weight: 700;
 }
 
+.math-node.inline {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.2em;
+}
+
+.math-node.block {
+  display: block;
+  margin: 0.5em 0;
+}

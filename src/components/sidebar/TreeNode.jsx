@@ -1,4 +1,4 @@
-import Reac, { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import {
   FolderIcon,
   DocumentIcon,
@@ -34,6 +34,7 @@ const TreeNode = ({
   const isExpanded = expandedFolders.has(item.id);
   const isSelected = selectedFile?.id === item.id;
   const dropdownRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -43,6 +44,22 @@ const TreeNode = ({
         showDropdown === item.id
       ) {
         setShowDropdown(null);
+      }
+
+      // 检查是否点击在输入框外部
+      if (
+        inputRef.current &&
+        !inputRef.current.contains(event.target) &&
+        (isRenaming || (newItemParentId === item.id && newItemType))
+      ) {
+        if (isRenaming) {
+          cancelRename(); // 取消重命名
+          setNewItemName(""); // 清除输入框内容
+        }
+        if (newItemParentId === item.id && newItemType) {
+          setNewItemName(""); // 清除输入框内容
+          confirmNewItem(); // 假设 confirmNewItem 会检查空值并取消新建
+        }
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -54,7 +71,7 @@ const TreeNode = ({
       {item.type === "folder" ? (
         <div className="relative">
           {isRenaming ? (
-            <div className="flex items-center">
+            <div className="flex items-center" ref={inputRef}>
               <FolderIcon className="w-5 h-5 mr-2" />
               <input
                 type="text"
@@ -65,7 +82,7 @@ const TreeNode = ({
                   if (e.key === "Enter") confirmRename(item.id);
                   if (e.key === "Escape") cancelRename();
                 }}
-                className="w-full p-1 rounded bg-gray-200 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-1 rounded bg-gray-300 dark:bg-gray-800 focus:outline-none"
                 autoFocus
               />
             </div>
@@ -101,7 +118,7 @@ const TreeNode = ({
           {isExpanded && (
             <ul>
               {newItemParentId === item.id && newItemType && (
-                <li className={`pl-${(level + 1) * 4}`}>
+                <li className={`pl-${(level + 1) * 4}`} ref={inputRef}>
                   <input
                     type="text"
                     value={newItemName}
@@ -109,7 +126,7 @@ const TreeNode = ({
                     onBlur={confirmNewItem}
                     onKeyDown={(e) => e.key === "Enter" && confirmNewItem()}
                     placeholder={`新建名称`}
-                    className="w-full p-1 rounded bg-gray-200 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-1 rounded bg-gray-300 dark:bg-gray-800 focus:outline-none"
                     autoFocus
                   />
                 </li>
@@ -146,7 +163,7 @@ const TreeNode = ({
       ) : (
         <div className="relative">
           {isRenaming ? (
-            <div className="flex items-center">
+            <div className="flex items-center" ref={inputRef}>
               <DocumentIcon className="w-5 h-5 mr-2" />
               <input
                 type="text"
@@ -157,7 +174,7 @@ const TreeNode = ({
                   if (e.key === "Enter") confirmRename(item.id);
                   if (e.key === "Escape") cancelRename();
                 }}
-                className="w-full p-1 rounded bg-gray-200 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-1 rounded bg-gray-300 dark:bg-gray-800 focus:outline-none"
                 autoFocus
               />
             </div>
