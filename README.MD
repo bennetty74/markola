@@ -11,7 +11,8 @@ Markola 是一个功能丰富的笔记本软件，支持 Markdown 语法、文�
 ## 功能特性
 
 ### 已实现功能
-- **Markdown 支持**：支持大部分 Markdown 语法，轻松编写格式化的笔记。
+- **所见即所得**：支持根Typora所见即所得的编辑模式
+- **Markdown 支持**：支持大部分 Markdown 语法，轻松编写格式化的笔记。但不仅仅是markdown
 - **文字颜色**：为文字添加颜色，突出重点内容。
 - **文字格式**：下划线、删除线、加粗、斜体
 - **高亮**：支持文本高亮，方便标记重要信息。
@@ -25,9 +26,10 @@ Markola 是一个功能丰富的笔记本软件，支持 Markdown 语法、文�
 - **导出功能**：支持将笔记导出为 PDF 和 HTML 格式。
 - **动画效果**：界面中有一只可爱的小猫动画，增添趣味性。
 - **漂亮界面**：简洁美观的界面设计，提升使用体验。
+- **公式支持**：支持 LaTeX 公式渲染。支持行内公式`$x^2$`和块状公式`\[x^3+x5^5\]`
 
 ### 待开发功能
-- **公式支持**：支持 LaTeX 公式渲染。
+
 - **画布功能**：支持手绘和图形绘制。
 - **导出为 Markdown**：支持导出为 Markdown 文件
 
@@ -36,14 +38,14 @@ Markola 是一个功能丰富的笔记本软件，支持 Markdown 语法、文�
 
 ## 截图
 
-![Notebook App Screenshot 1](screenshot/main.png) <!-- 替换为你的应用截图 -->
-![Notebook App Screenshot 2](screenshot/edit.png) <!-- 替换为你的应用截图 -->
+![Notebook App Screenshot 1](screenshot/main.png) 
+![Notebook App Screenshot 2](screenshot/edit.png) 
 
 ---
 
 ## 技术栈
 - **前端**：React
-- **Markdown 渲染**：tiptap
+- **Markdown 渲染**：Tiptap
 - **动画效果**：Lottie
 - **界面设计**：Tailwind CSS
 ---

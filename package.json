@@ -108,7 +108,7 @@
       "artifactName": "${productName}-${version}-${arch}.${ext}",
       "desktop": {
         "Name": "Markola",
-        "Icon": "icon",
+        "Icon": "build/icons/png",
         "Type": "Application",
         "Categories": "Utility"
       }
