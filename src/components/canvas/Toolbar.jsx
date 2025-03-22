@@ -3,13 +3,15 @@ import { Icon } from '@iconify/react'; // 引入 Iconify 图标库
 
 const Toolbar = ({ onShapeSelect, selectedShapeType, onDelete, hasSelectedShape }) => {
   const tools = [
-    { type: 'rect', icon: 'mdi:rectangle-outline', label: '矩形' }, // 准确的矩形图标
-    { type: 'circle', icon: 'mdi:circle-outline', label: '圆形' }, // 准确的圆形图标
-    { type: 'star', icon: 'mdi:star-outline', label: '星星' }, // 准确的星星图标
-    { type: 'heart', icon: 'mdi:heart-outline', label: '心形' }, // 准确的心形图标
-    { type: 'triangle', icon: 'mdi:triangle-outline', label: '三角形' }, // 准确的三角形图标
-    { type: 'sun', icon: 'mdi:weather-sunny', label: '太阳' }, // 准确的太阳图标
-    { type: 'text', icon: 'mdi:format-text', label: '文字' }, // 准确的文字图标
+    { type: 'rect', icon: 'mdi:rectangle-outline', label: '矩形' },
+    { type: 'circle', icon: 'mdi:circle-outline', label: '圆形' },
+    { type: 'star', icon: 'mdi:star-outline', label: '星星' },
+    { type: 'ring', icon: 'mdi:ring', label: '环形' },
+    { type: 'triangle', icon: 'mdi:triangle-outline', label: '三角形' },
+    { type: 'sun', icon: 'mdi:weather-sunny', label: '太阳' },
+    { type: 'text', icon: 'mdi:format-text', label: '文字' },
+    { type: 'line', icon: 'mdi:minus', label: '线条' }, // 新增：线条工具
+    { type: 'arrow', icon: 'mdi:arrow-right', label: '箭头' }, // 新增：箭头工具
   ];
 
   return (
@@ -18,7 +20,7 @@ const Toolbar = ({ onShapeSelect, selectedShapeType, onDelete, hasSelectedShape 
         <button
           key={tool.type}
           onClick={() => onShapeSelect(tool.type)}
-          className={`p-2 rounded ${
+          className={`p-1 rounded ${
             selectedShapeType === tool.type
               ? 'bg-gray-500 text-white'
               : 'text-gray-700 hover:bg-gray-400'
@@ -31,13 +33,13 @@ const Toolbar = ({ onShapeSelect, selectedShapeType, onDelete, hasSelectedShape 
       {/* 删除按钮 */}
       <button
         onClick={onDelete}
-        className={`p-2 rounded ${
+        className={`p-1 rounded ${
           hasSelectedShape
             ? 'bg-red-500 text-white hover:bg-red-600'
             : 'bg-gray-300 text-gray-500 cursor-not-allowed'
         }`}
         title="删除选中图形"
-        disabled={!hasSelectedShape} // 无选中图形时禁用
+        disabled={!hasSelectedShape}
       >
         <Icon icon="mdi:trash-can-outline" width="20" height="20" />
       </button>

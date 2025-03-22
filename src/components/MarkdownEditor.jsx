@@ -71,29 +71,27 @@ function MarkdownEditor({ onContentChange, initialContent, theme, setSelectedFil
   }, []);
 
   return (
-    <div
-      className="w-full h-full relative"
-      ref={editorRef}
-      onContextMenu={handleContextMenu}
-    >
-      <EditorContent
-        editor={editor}
-        className={`p-8 z-automax-w-none mt-[65px] ${
-          theme === "dark" ? "prose-invert" : ""
-        }`}
-      />
-      <TableContextMenu
-        editor={editor}
-        contextMenu={contextMenu}
-        setContextMenu={setContextMenu}
-        theme={theme}
-      />
+    <div className="w-full h-full flex flex-col">
       <Toolbar
-        className="z-9999"
+        className="z-50" // 提高 z-index，确保在内容上方
         editor={editor}
         theme={theme}
         setSelectedFile={setSelectedFile}
       />
+      <div className="flex-1 overflow-y-auto relative">
+        <EditorContent
+          editor={editor}
+          className={`p-8 max-w-none mt-1 ${
+            theme === "dark" ? "prose-invert" : ""
+          }`}
+        />
+        <TableContextMenu
+          editor={editor}
+          contextMenu={contextMenu}
+          setContextMenu={setContextMenu}
+          theme={theme}
+        />
+      </div>
     </div>
   );
 }

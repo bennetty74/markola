@@ -4,7 +4,7 @@ import { Text, Transformer } from 'react-konva';
 const TextComponent = ({
   shape,
   isSelected,
-  isEditing, // 从父组件接收编辑状态
+  isEditing,
   onSelect,
   onChange,
   onDragEnd,
@@ -21,15 +21,16 @@ const TextComponent = ({
     }
   }, [isSelected, isEditing]);
 
-
   return (
     <>
       <Text
         ref={textRef}
         {...shape}
+        fill={shape.textFill || shape.fill || '#000000'}
+        fontStyle={shape.fontStyle || 'normal'}
         onClick={onSelect}
         onDblClick={() => {
-          onStartEditing(shape.id, shape.text); // 直接调用父组件的编辑函数
+          onStartEditing(shape.id, shape.text);
         }}
         onDragEnd={onDragEnd}
         onTransformEnd={(e) => {
@@ -45,9 +46,9 @@ const TextComponent = ({
             fontSize: Math.max(10, shape.fontSize * scaleX),
           });
         }}
-        stroke={shape.stroke || (isSelected ? 'black' : null)}
-        strokeWidth={shape.strokeWidth || 2}
-        draggable={!isEditing} // 使用父组件传递的 isEditing
+        stroke={shape.stroke} 
+        strokeWidth={isSelected ? 1 : shape.strokeWidth || 2}
+        draggable={!isEditing}
       />
       {isSelected && !isEditing && (
         <Transformer
