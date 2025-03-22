@@ -14,7 +14,7 @@ const TableContextMenu = ({ editor, contextMenu, setContextMenu, theme }) => {
   return (
     <div
       className={`absolute z-10 w-60 rounded-lg shadow-lg ${
-        theme === "dark" ? "bg-gray-700 text-white" : "bg-gray-200 text-black"
+        theme === "dark" ? "bg-gray-700 text-white" : "bg-gray-100 text-black"
       }`}
       style={{ top: contextMenu.y, left: contextMenu.x }}
     >
@@ -24,7 +24,7 @@ const TableContextMenu = ({ editor, contextMenu, setContextMenu, theme }) => {
           setContextMenu(null);
         }}
         className={`w-full text-left px-4 py-2 hover:${
-          theme === "dark" ? "bg-gray-600" : "bg-gray-200"
+          theme === "dark" ? "bg-gray-600" : "bg-gray-100"
         } flex items-center rounded-t-lg`}
         disabled={!editor.can().addRowBefore()}
       >
@@ -36,7 +36,7 @@ const TableContextMenu = ({ editor, contextMenu, setContextMenu, theme }) => {
           setContextMenu(null);
         }}
         className={`w-full text-left px-4 py-2 hover:${
-          theme === "dark" ? "bg-gray-600" : "bg-gray-200"
+          theme === "dark" ? "bg-gray-600" : "bg-gray-100"
         } flex items-center`}
         disabled={!editor.can().addRowAfter()}
       >
@@ -48,7 +48,7 @@ const TableContextMenu = ({ editor, contextMenu, setContextMenu, theme }) => {
           setContextMenu(null);
         }}
         className={`w-full text-left px-4 py-2 hover:${
-          theme === "dark" ? "bg-gray-600" : "bg-gray-200"
+          theme === "dark" ? "bg-gray-600" : "bg-gray-100"
         } flex items-center`}
         disabled={!editor.can().addColumnBefore()}
       >
@@ -60,7 +60,7 @@ const TableContextMenu = ({ editor, contextMenu, setContextMenu, theme }) => {
           setContextMenu(null);
         }}
         className={`w-full text-left px-4 py-2 hover:${
-          theme === "dark" ? "bg-gray-600" : "bg-gray-200"
+          theme === "dark" ? "bg-gray-600" : "bg-gray-100"
         } flex items-center`}
         disabled={!editor.can().addColumnAfter()}
       >
@@ -72,7 +72,7 @@ const TableContextMenu = ({ editor, contextMenu, setContextMenu, theme }) => {
           setContextMenu(null);
         }}
         className={`w-full text-left px-4 py-2 hover:${
-          theme === "dark" ? "bg-gray-600" : "bg-gray-200"
+          theme === "dark" ? "bg-gray-600" : "bg-gray-100"
         } flex items-center`}
         disabled={!editor.can().deleteRow()}
       >
@@ -84,7 +84,7 @@ const TableContextMenu = ({ editor, contextMenu, setContextMenu, theme }) => {
           setContextMenu(null);
         }}
         className={`w-full text-left px-4 py-2 hover:${
-          theme === "dark" ? "bg-gray-600" : "bg-gray-200"
+          theme === "dark" ? "bg-gray-600" : "bg-gray-100"
         } flex items-center rounded-b-lg`}
         disabled={!editor.can().deleteColumn()}
       >

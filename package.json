@@ -1,6 +1,6 @@
 {
   "name": "markola",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "main": "electron/main.js",
   "author": {
     "name": "bennetty74",
@@ -12,15 +12,15 @@
     "start": "NODE_ENV=pro electron .",
     "build": "vite build && electron-builder --mac --win --linux",
     "build:electron": "electron-builder",
-    "build:mac": "npm run build:mac:x64 && npm run build:mac:arm64",
-    "build:mac:x64": "electron-builder --mac --x64",
-    "build:mac:arm64": "electron-builder --mac --arm64",
-    "build:mac:universal": "electron-builder --mac --universal",
-    "build:win": "electron-builder --win",
-    "build:linux:x64": "electron-builder --linux --x64",
-    "build:linux:arm64": "electron-builder --linux --arm64",
-    "build:linux:universal": "electron-builder --linux --universal",
-    "build:linux": "electron-builder --linux --x64 && electron-builder --linux --arm64"
+    "build:mac": "vite build && npm run build:mac:x64 && npm run build:mac:arm64",
+    "build:mac:x64": "vite build && electron-builder --mac --x64",
+    "build:mac:arm64": "vite build && electron-builder --mac --arm64",
+    "build:mac:universal": "vite build && electron-builder --mac --universal",
+    "build:win": "vite build && electron-builder --win",
+    "build:linux:x64": "vite build && electron-builder --linux --x64",
+    "build:linux:arm64": "vite build && electron-builder --linux --arm64",
+    "build:linux:universal": "vite build && electron-builder --linux --universal",
+    "build:linux": "vite build && electron-builder --linux --x64 && electron-builder --linux --arm64"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -48,10 +48,8 @@
     "@tiptap/extension-underline": "^2.11.5",
     "@tiptap/react": "^2.11.5",
     "@tiptap/starter-kit": "^2.11.5",
-    "fabric": "^4.6.0",
     "framer-motion": "^12.5.0",
     "html2pdf.js": "^0.10.3",
-    "jspdf": "^3.0.0",
     "katex": "^0.16.21",
     "konva": "^9.3.6",
     "lodash": "^4.17.21",
@@ -65,8 +63,7 @@
     "react-particles": "^2.12.2",
     "tiptap-markdown": "^0.8.10",
     "tsparticles-slim": "^2.12.0",
-    "uuid": "^11.1.0",
-    "zustand": "^5.0.3"
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",

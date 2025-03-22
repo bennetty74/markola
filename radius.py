@@ -25,6 +25,6 @@ def create_rounded_image(input_path, output_path, radius=100):
     print(f"Rounded image saved to {output_path}")
 
 # Example usage
-input_image = "build/icon.png"  # Replace with your input image path
+input_image = "build/icon.jpg"  # Replace with your input image path
 output_image = "build/icon_corner.png"  # Replace with your desired output path
 create_rounded_image(input_image, output_image, radius=200)

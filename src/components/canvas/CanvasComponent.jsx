@@ -39,17 +39,9 @@ const CanvasComponent = ({ node, updateAttributes }) => {
 
   return (
     <NodeViewWrapper className="canvas-node" ref={wrapperRef}>
-      <div className="my-4 bg-gray-200 rounded-lg border border-gray-300 flex overflow-hidden">
+      <div className="my-4 bg-gray-100 rounded-lg border border-gray-300 flex overflow-hidden">
         <div
-          className="flex items-center justify-center transition-[width,opacity] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
-          style={{
-            width: isCanvasSelected ? '60px' : '0', // 假设 Toolbar 宽度为 60px
-            opacity: isCanvasSelected ? 1 : 0,
-            transition: isCanvasSelected
-              ? 'width 500ms cubic-bezier(0.4, 0, 0.2, 1), opacity 300ms ease-out' // 显示动画
-              : 'width 500ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease-in' // 隐藏动画
-          }}
-        >
+          className="flex items-center justify-center">
           {isCanvasSelected && (
             <Toolbar
               onShapeSelect={(type) => setSelectedShapeType(type)}

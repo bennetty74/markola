@@ -28,6 +28,7 @@ const TextComponent = ({
         {...shape}
         fill={shape.textFill || shape.fill || '#000000'}
         fontStyle={shape.fontStyle || 'normal'}
+        textDecoration={shape.textDecoration || 'none'}
         onClick={onSelect}
         onDblClick={() => {
           onStartEditing(shape.id, shape.text);

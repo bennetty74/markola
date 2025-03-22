@@ -1,21 +1,20 @@
 import React from 'react';
-import { Icon } from '@iconify/react'; // 引入 Iconify 图标库
+import { TbStar, TbCircle, TbTriangle , TbRectangle, TbTextResize, TbPencil, TbArrowNarrowRight, TbTrash} from "react-icons/tb";
 
 const Toolbar = ({ onShapeSelect, selectedShapeType, onDelete, hasSelectedShape }) => {
-  const tools = [
-    { type: 'rect', icon: 'mdi:rectangle-outline', label: '矩形' },
-    { type: 'circle', icon: 'mdi:circle-outline', label: '圆形' },
-    { type: 'star', icon: 'mdi:star-outline', label: '星星' },
-    { type: 'ring', icon: 'mdi:ring', label: '环形' },
-    { type: 'triangle', icon: 'mdi:triangle-outline', label: '三角形' },
-    { type: 'sun', icon: 'mdi:weather-sunny', label: '太阳' },
-    { type: 'text', icon: 'mdi:format-text', label: '文字' },
-    { type: 'line', icon: 'mdi:minus', label: '线条' }, // 新增：线条工具
-    { type: 'arrow', icon: 'mdi:arrow-right', label: '箭头' }, // 新增：箭头工具
-  ];
+
+const tools = [
+  { type: 'rect', icon: <TbRectangle className='w-6 h-6'/>, label: '矩形' },
+  { type: 'circle', icon: <TbCircle className='w-6 h-6'/>, label: '圆形' },
+  { type: 'star', icon: <TbStar className='w-6 h-6'/>, label: '星星' },
+  { type: 'triangle', icon:  <TbTriangle className='w-6 h-6'/>, label: '三角形' },
+  { type: 'text', icon: <TbTextResize className='w-6 h-6'/>, label: '文字' },
+  { type: 'line', icon: <TbPencil className='w-6 h-6'/>, label: '线条' },
+  { type: 'arrow', icon: <TbArrowNarrowRight className='w-6 h-6'/>, label: '箭头' },
+];
 
   return (
-    <div className="ml-2 w-15 p-2 flex-shrink-0 flex flex-col items-center gap-2 bg-gray-200 shadow-md">
+    <div className="ml-2 p-2 rounded-lg flex-shrink-0 flex flex-col items-center gap-2 bg-gray-100 shadow-lg">
       {tools.map((tool) => (
         <button
           key={tool.type}
@@ -27,7 +26,7 @@ const Toolbar = ({ onShapeSelect, selectedShapeType, onDelete, hasSelectedShape 
           }`}
           title={tool.label}
         >
-          <Icon icon={tool.icon} width="20" height="20" />
+          {tool.icon}
         </button>
       ))}
       {/* 删除按钮 */}
@@ -36,12 +35,12 @@ const Toolbar = ({ onShapeSelect, selectedShapeType, onDelete, hasSelectedShape 
         className={`p-1 rounded ${
           hasSelectedShape
             ? 'bg-red-500 text-white hover:bg-red-600'
-            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            : 'text-gray-500 cursor-not-allowed'
         }`}
         title="删除选中图形"
         disabled={!hasSelectedShape}
       >
-        <Icon icon="mdi:trash-can-outline" width="20" height="20" />
+        <TbTrash className='w-6 h-6' />
       </button>
     </div>
   );

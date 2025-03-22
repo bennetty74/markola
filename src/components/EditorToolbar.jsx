@@ -145,7 +145,7 @@ const addCanvas = () => {
   }
 
   return (
-    <div className="toolbar w-full h-[58px] z-50 bg-gray-200 dark:bg-gray-900 flex flex-wrap gap-1.5 px-2 py-1 border-b border-gray-300 dark:border-gray-700">
+    <div className="toolbar w-full h-10 z-50 bg-gray-100 dark:bg-gray-900 flex flex-wrap gap-1 px-2 py-1 border-b border-gray-300 dark:border-gray-700">
       <ToolButton onClick={() => editor.chain().focus().undo().run()} title="撤销">
         <ArrowUturnLeftIcon className="w-5 h-5" />
       </ToolButton>

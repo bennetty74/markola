@@ -123,11 +123,11 @@ function App() {
 
   return (
     <div
-      className={`flex flex-col h-screen bg-gray-200 dark:bg-gray-900 dark:text-white`}
+      className={`flex flex-col h-screen bg-gray-100 dark:bg-gray-900 dark:text-white`}
     >
       {/* 顶部栏保持不变 */}
       <div
-        className={`flex items-center justify-between px-4 py-2 bg-gray-200 dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 select-none`}
+        className={`flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 select-none`}
         style={{ WebkitAppRegion: "drag" }}
       >
         <div className="flex items-center">
@@ -155,7 +155,7 @@ function App() {
         <div
           className={`${
             isSidebarOpen ? "w-1/5 border-r border-gray-300" : "w-0"
-          } h-full bg-gray-200 dark:bg-gray-900 dark:text-white overflow-y-auto scrollbar-hide transition-all duration-300`}
+          } h-full bg-gray-100 dark:bg-gray-900 dark:text-white overflow-y-auto scrollbar-hide transition-all duration-300`}
         >
           {isSidebarOpen && (
             <NotebookSidebar
@@ -173,7 +173,7 @@ function App() {
         <div className="absolute bottom-2 left-2 z-50">
           <button
             onClick={toggleSidebar}
-            className="p-1 rounded-full shadow-lg hover:bg-gray-300 dark:hover:bg-gray-800 transition-colors bg-gray-200 dark:bg-gray-900"
+            className="p-1 rounded-full shadow-lg hover:bg-gray-300 dark:hover:bg-gray-800 transition-colors bg-gray-100 dark:bg-gray-900"
             title={isSidebarOpen ? "收起侧边栏" : "展开侧边栏"}
           >
             {isSidebarOpen ? (

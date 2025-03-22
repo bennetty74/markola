@@ -44,19 +44,6 @@ const ShapeWithText = ({ shape, commonProps, isSelected, onStartEditing }) => {
             {...commonProps}
           />
         );
-        case 'ring': // 替换 heart 为 ring
-        return (
-          <Ellipse
-            ref={shapeRef}
-            {...shape}
-            {...commonProps}
-            radiusX={shape.width / 2}
-            radiusY={shape.height / 2}
-            fill="transparent" // 空心
-            stroke={shape.stroke || '#000000'} // 默认黑色描边
-            strokeWidth={shape.strokeWidth || 2} // 默认宽度 2
-          />
-        );
       case 'triangle':
         return (
           <RegularPolygon
@@ -64,17 +51,6 @@ const ShapeWithText = ({ shape, commonProps, isSelected, onStartEditing }) => {
             {...shape}
             sides={3}
             radius={shape.width / 2}
-            {...commonProps}
-          />
-        );
-      case 'sun':
-        return (
-          <Star
-            ref={shapeRef}
-            {...shape}
-            numPoints={8}
-            innerRadius={30}
-            outerRadius={50}
             {...commonProps}
           />
         );
@@ -93,6 +69,7 @@ const ShapeWithText = ({ shape, commonProps, isSelected, onStartEditing }) => {
           fontSize={shape.fontSize}
           fill={shape.textFill || '#000000'}
           fontStyle={shape.fontStyle || 'normal'}
+          textDecoration={shape.textDecoration || 'none'}
           align="center"
           verticalAlign="middle"
           onDblClick={() => onStartEditing(shape.id, shape.text)}

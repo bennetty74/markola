@@ -45,7 +45,7 @@ const SidebarHeader = ({
       </button>
       {showDropdown === "root" && (
         <div
-          className="absolute right-0 top-full mt-2 bg-gray-200 dark:bg-gray-700 rounded-lg shadow-lg z-50 w-40"
+          className="absolute right-0 top-full mt-2 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-lg z-50 w-40"
           ref={dropdownRef}
         >
           <button

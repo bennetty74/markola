@@ -19,7 +19,7 @@ if (!fs.existsSync(preloadPath)) {
 }
 
 let win = null;
-let width = 1100;
+let width = 1300;
 let height = 800;
 
 function createWindow() {
