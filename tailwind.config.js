@@ -17,6 +17,15 @@ export default {
           900: '#2c2721', // 极深暖灰，近似炭黑但有温度
         },
       },
+      keyframes: {
+        'popup-fade-in': {
+          'from': { opacity: 0, transform: 'translateY(-10px)' },
+          'to': { opacity: 1, transform: 'translateY(0)' }
+        }
+      },
+      animation: {
+        'popup-fade-in': 'popup-fade-in 0.2s ease-out'
+      }
     },
   },
   plugins: [

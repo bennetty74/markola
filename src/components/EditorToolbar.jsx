@@ -23,6 +23,7 @@ import {
   MinusIcon,
   CheckCircleIcon,
   ArrowLeftStartOnRectangleIcon,
+  WrenchScrewdriverIcon,
   VariableIcon
 } from '@heroicons/react/24/outline';
 import { RxTextAlignCenter, RxHeading } from 'react-icons/rx';
@@ -70,6 +71,14 @@ function Toolbar({ editor, theme, setSelectedFile }) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isColorOpen, isLinkOpen, isHeadingOpen]);
+
+const addCanvas = () => {
+    editor
+      .chain()
+      .focus()
+      .insertContent({ type: 'canvasNode', attrs: { shapes: [] } })
+      .run();
+  };
 
   const setLink = () => {
     setIsLinkOpen(true);
@@ -375,6 +384,11 @@ function Toolbar({ editor, theme, setSelectedFile }) {
 
       <ToolButton onClick={insertMath} isActive={editor.isActive('math')} title="数学公式">
         <VariableIcon className="w-5 h-5" />
+      </ToolButton>
+
+
+      <ToolButton onClick={addCanvas} isActive={editor.isActive('canvas')} title="插入画布">
+        <WrenchScrewdriverIcon className="w-5 h-5 rotate-180" />
       </ToolButton>
 
       <ToolButton onClick={exitEdit} isActive={editor.isActive('exit')} title="退出编辑">

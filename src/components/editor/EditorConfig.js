@@ -21,9 +21,10 @@ import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
 import { lowlight } from "lowlight";
 import { ReactNodeViewRenderer } from "@tiptap/react";
-import CodeBlockComponent from "../codeblock/CodeBlockComponent.jsx";
-import ImageUploadComponent from "../image/ImageUploadComponent.jsx";
+import CodeBlockComponent from "../codeblock/CodeBlockComponent";
+import ImageUploadComponent from "../image/ImageUploadComponent";
 import { MathBlock, MathInline } from '../math/MathNode';
+import {CanvasNode} from '../canvas/CanvasNode'
 
 export const editorConfig = {
   extensions: [
@@ -34,6 +35,7 @@ export const editorConfig = {
     }),
     MathBlock,
     MathInline,
+    CanvasNode,
     Markdown.configure({
       html: true,
       transformPastedText: true,

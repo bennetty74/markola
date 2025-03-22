@@ -15,7 +15,7 @@ function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [tree, setTree] = useState([]);
   const [theme, setTheme] = useState("light");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // 默认收起
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // 默认收起
 
   // 配置 Lottie 动画
   const lottieOptions = {
