@@ -3,6 +3,7 @@ import { NodeViewWrapper } from '@tiptap/react';
 import Toolbar from './Toolbar';
 import CanvasArea from './CanvasArea';
 
+// CanvasComponent.jsx
 const CanvasComponent = ({ node, updateAttributes }) => {
   const [shapes, setShapes] = useState(node.attrs.shapes || []);
   const [selectedId, setSelectedId] = useState(null);
@@ -11,7 +12,14 @@ const CanvasComponent = ({ node, updateAttributes }) => {
   const [isCanvasSelected, setIsCanvasSelected] = useState(false);
   const wrapperRef = useRef(null);
 
-  React.useEffect(() => {
+  // 监听 node.attrs 的变化，保持状态同步
+  useEffect(() => {
+    setShapes(node.attrs.shapes || []);
+    setStageHeight(node.attrs.height || 400);
+  }, [node.attrs.shapes, node.attrs.height]);
+
+  // 更新节点属性
+  useEffect(() => {
     updateAttributes({ shapes, height: stageHeight });
   }, [shapes, stageHeight, updateAttributes]);
 
@@ -39,9 +47,8 @@ const CanvasComponent = ({ node, updateAttributes }) => {
 
   return (
     <NodeViewWrapper className="canvas-node" ref={wrapperRef}>
-      <div className="my-4 bg-gray-100 rounded-lg border border-gray-300 flex overflow-hidden">
-        <div
-          className="flex items-center justify-center">
+      <div className={`my-4 bg-gray-100 rounded-lg ${isCanvasSelected ? 'border border-gray-300': ''} flex overflow-hidden`}>
+        <div className="flex items-center justify-center">
           {isCanvasSelected && (
             <Toolbar
               onShapeSelect={(type) => setSelectedShapeType(type)}
