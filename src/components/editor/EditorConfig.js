@@ -92,7 +92,9 @@ export const editorConfig = {
     }),
     Underline,
     Strike,
-    Table.configure({ resizable: true }),
+    Table.configure({ resizable: true, HTMLAttributes: {
+      class: 'tiptap-table'
+    } }),
     TableRow,
     TableCell,
     TableHeader,

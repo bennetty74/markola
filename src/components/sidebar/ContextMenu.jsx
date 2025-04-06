@@ -14,9 +14,20 @@ const ContextMenu = ({
   exportToPDF,
   exportToHTML,
   isExporting,
+  position, // 新增位置属性
 }) => {
+  const menuStyle = {
+    position: 'fixed', // 改为固定定位
+    left: `${position.x}px`, // 使用传递的 x 坐标
+    top: `${position.y}px`, // 使用传递的 y 坐标
+    zIndex: 50,
+  };
+
   return (
-    <div className="absolute left-0 top-full mt-1 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-lg z-50 w-40">
+    <div
+      className="bg-gray-100 dark:bg-gray-700 rounded-lg shadow-lg w-40"
+      style={menuStyle} // 应用动态样式
+    >
       {item.type === 'folder' && (
         <>
           <button

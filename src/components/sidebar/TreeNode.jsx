@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   FolderIcon,
   DocumentIcon,
   EllipsisHorizontalIcon,
+  ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 import ContextMenu from "./ContextMenu";
 
@@ -35,6 +36,9 @@ const TreeNode = ({
   const isSelected = selectedFile?.id === item.id;
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
+  const ellipsisRef = useRef(null); // 新增用于定位省略号的 ref
+  const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 }); // 存储菜单位置
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -46,25 +50,34 @@ const TreeNode = ({
         setShowDropdown(null);
       }
 
-      // 检查是否点击在输入框外部
       if (
         inputRef.current &&
         !inputRef.current.contains(event.target) &&
         (isRenaming || (newItemParentId === item.id && newItemType))
       ) {
         if (isRenaming) {
-          cancelRename(); // 取消重命名
-          setNewItemName(""); // 清除输入框内容
+          cancelRename();
+          setNewItemName("");
         }
         if (newItemParentId === item.id && newItemType) {
-          setNewItemName(""); // 清除输入框内容
-          confirmNewItem(); // 假设 confirmNewItem 会检查空值并取消新建
+          setNewItemName("");
+          confirmNewItem();
         }
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [showDropdown, item.id, setShowDropdown]);
+  }, [showDropdown, item.id, setShowDropdown, isRenaming, newItemParentId, newItemType, cancelRename, setNewItemName, confirmNewItem]);
+
+  const handleEllipsisClick = (e) => {
+    const rect = ellipsisRef.current.getBoundingClientRect();
+    setMenuPosition({
+      x: rect.right, // 菜单出现在省略号右侧
+      y: rect.top + window.scrollY, // 考虑页面滚动
+    });
+    setShowDropdown(showDropdown === item.id ? null : item.id);
+  };
+
 
   return (
     <li className={`pl-${level * 4}`}>
@@ -72,6 +85,7 @@ const TreeNode = ({
         <div className="relative">
           {isRenaming ? (
             <div className="flex items-center" ref={inputRef}>
+              <div className="w-4 mr-1" /> {/* 占位符，与展开图标对齐 */}
               <FolderIcon className="w-5 h-5 mr-2" />
               <input
                 type="text"
@@ -88,6 +102,12 @@ const TreeNode = ({
             </div>
           ) : (
             <div className="flex items-center cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis hover:bg-gray-700 hover:text-white rounded px-2 py-1 transition-colors">
+              <ChevronRightIcon
+                className={`w-4 h-4 mr-1 transform transition-transform ${
+                  isExpanded ? "rotate-90" : ""
+                }`}
+                onClick={() => toggleFolder(item.id)}
+              />
               <span
                 onClick={() => toggleFolder(item.id)}
                 className="flex items-center flex-1"
@@ -95,10 +115,9 @@ const TreeNode = ({
                 <FolderIcon className="w-5 h-5 mr-2" /> {item.name}
               </span>
               <EllipsisHorizontalIcon
+              ref={ellipsisRef}
                 className="w-4 h-4 mr-2 cursor-pointer"
-                onClick={() =>
-                  setShowDropdown(showDropdown === item.id ? null : item.id)
-                }
+                onClick={handleEllipsisClick}
               />
             </div>
           )}
@@ -112,6 +131,7 @@ const TreeNode = ({
                 exportToPDF={exportToPDF}
                 exportToHTML={exportToHTML}
                 isExporting={isExporting}
+                position={menuPosition}
               />
             </div>
           )}
@@ -119,16 +139,19 @@ const TreeNode = ({
             <ul>
               {newItemParentId === item.id && newItemType && (
                 <li className={`pl-${(level + 1) * 4}`} ref={inputRef}>
-                  <input
-                    type="text"
-                    value={newItemName}
-                    onChange={(e) => setNewItemName(e.target.value)}
-                    onBlur={confirmNewItem}
-                    onKeyDown={(e) => e.key === "Enter" && confirmNewItem()}
-                    placeholder={`新建名称`}
-                    className="w-full p-1 rounded bg-gray-300 dark:bg-gray-800 focus:outline-none"
-                    autoFocus
-                  />
+                  <div className="flex items-center">
+                    <div className="w-4 mr-1" /> {/* 占位符 */}
+                    <input
+                      type="text"
+                      value={newItemName}
+                      onChange={(e) => setNewItemName(e.target.value)}
+                      onBlur={confirmNewItem}
+                      onKeyDown={(e) => e.key === "Enter" && confirmNewItem()}
+                      placeholder={`新建名称`}
+                      className="w-full p-1 rounded bg-gray-300 dark:bg-gray-800 focus:outline-none"
+                      autoFocus
+                    />
+                  </div>
                 </li>
               )}
               {item.children.map((child) => (
@@ -164,6 +187,7 @@ const TreeNode = ({
         <div className="relative">
           {isRenaming ? (
             <div className="flex items-center" ref={inputRef}>
+              <div className="w-4 mr-1" /> {/* 与文件夹的展开图标对齐 */}
               <DocumentIcon className="w-5 h-5 mr-2" />
               <input
                 type="text"
@@ -184,32 +208,33 @@ const TreeNode = ({
                 isSelected ? "bg-gray-600 text-white" : ""
               }`}
             >
+              <div className="w-4 mr-1" /> {/* 与文件夹的展开图标对齐 */}
               <DocumentIcon className="w-5 h-5 mr-2" />
               <span
-                onClick={() => onFileSelect(item)}
+                onClick={() => onFileSelect && onFileSelect(item)} // 添加检查
                 className="flex-1 whitespace-nowrap overflow-hidden text-ellipsis"
               >
                 {item.name}
               </span>
               <EllipsisHorizontalIcon
+              ref={ellipsisRef}
                 className="w-4 h-4 mr-2 cursor-pointer"
-                onClick={() =>
-                  setShowDropdown(showDropdown === item.id ? null : item.id)
-                }
+                onClick={handleEllipsisClick}
               />
             </div>
           )}
           {showDropdown === item.id && (
             <div ref={dropdownRef}>
               <ContextMenu
-              item={item}
-              startNewItem={startNewItem}
-              startRename={startRename}
-              deleteItem={deleteItem}
-              exportToPDF={exportToPDF}
-              exportToHTML={exportToHTML}
-              isExporting={isExporting}
-            />
+                item={item}
+                startNewItem={startNewItem}
+                startRename={startRename}
+                deleteItem={deleteItem}
+                exportToPDF={exportToPDF}
+                exportToHTML={exportToHTML}
+                isExporting={isExporting}
+                position={menuPosition}
+              />
             </div>
           )}
         </div>

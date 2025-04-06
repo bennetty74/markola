@@ -184,7 +184,7 @@ function NotebookSidebar({
   const filteredTree = searchQuery ? filterTree(tree, searchQuery) : tree;
 
   return (
-    <div className="w-full h-full p-4 relative" ref={dropdownRef}>
+    <div className="w-full h-full p-2 relative" ref={dropdownRef}>
       <SidebarHeader
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}

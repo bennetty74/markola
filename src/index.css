@@ -102,11 +102,42 @@ input[type="range"]::-moz-range-thumb {
   margin: 1em 0;
 }
 
+
 .tiptap th,
 .tiptap td {
-  border: 1px solid #ddd;
+  border: 1px solid #88796e;
   padding: 0.5em;
   text-align: left;
+}
+
+.tiptap td:hover::after,
+.tiptap th:hover::after {
+  cursor: col-resize !important;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+}
+
+.tiptap th{
+  background-color: #e4ded5;
+}
+
+.tiptap th p{
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #443627;
+}
+
+.tiptap td p{
+  color: #443627;
+}
+
+.tiptap td,
+.tiptap th {
+  position: relative;
 }
 
 .tiptap th {
@@ -191,7 +222,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .tiptap.prose-invert table {
-  border-color: #444;
+  border-color: #252525;
 }
 
 .tiptap.prose-invert th {

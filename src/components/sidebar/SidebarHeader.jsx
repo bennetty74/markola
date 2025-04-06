@@ -48,12 +48,12 @@ const SidebarHeader = ({
           className="absolute right-0 top-full mt-2 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-lg z-50 w-40"
           ref={dropdownRef}
         >
-          <button
+          {/* <button
             onClick={() => startNewItem(null, "file")}
             className="w-full text-left px-4 py-2 hover:bg-gray-600 hover:text-white rounded-t-lg flex items-center"
           >
             <DocumentIcon className="w-5 h-5 mr-2" /> 新建文件
-          </button>
+          </button> */}
           <button
             onClick={() => startNewItem(null, "folder")}
             className="w-full text-left px-4 py-2 hover:bg-gray-600 hover:text-white rounded-b-lg flex items-center"

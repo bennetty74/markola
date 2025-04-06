@@ -68,7 +68,7 @@ const CanvasArea = ({
 
     const handleMouseMove = (e) => {
       const deltaY = e.clientY - startY;
-      const newHeight = Math.max(100, startHeight + deltaY);
+      const newHeight = Math.max(400, startHeight + deltaY);
       setStageHeight(newHeight);
     };
 
@@ -170,6 +170,7 @@ const CanvasArea = ({
   const handleStageClick = (e) => {
     const stage = e.target.getStage();
     const pointerPos = stage.getPointerPosition();
+    console.log("x=",pointerPos.x, "y=",pointerPos.y)
     setLastClickPos({ x: pointerPos.x, y: pointerPos.y });
 
     if (!selectedShapeType || ['line', 'arrow'].includes(selectedShapeType)) {
@@ -237,10 +238,14 @@ const CanvasArea = ({
 
   const getInputPosition = () => {
     if (!stageRef.current) return { left: 0, top: 0 };
-    const stagePos = stageRef.current.container().getBoundingClientRect();
+    
+    const stagePos = stageRef.current.getPointerPosition();
+    console.log("stagePos", stagePos)
+    
+    // 直接使用最后一次点击的位置
     return {
-      left: stagePos.left + lastClickPos.x,
-      top: stagePos.top + lastClickPos.y,
+      left: stagePos.x,
+      top: stagePos.y
     };
   };
 
@@ -467,28 +472,61 @@ const CanvasArea = ({
         <div className="w-full flex justify-center items-center opacity-50">
           <div
             ref={resizeBarRef}
-            className="w-20 h-2 bg-gray-200 cursor-ns-resize rounded-full hover:bg-gray-400"
+            className="w-20 h-2 bg-gray-600 cursor-ns-resize rounded-full hover:bg-gray-400"
             style={{ marginTop: "4px" }}
           />
         </div>
       </div>
       {editingShapeId && (() => {
+        
         const shape = shapes.find((s) => s.id === editingShapeId);
         if (!shape) return null;
         const { left, top } = getInputPosition();
         return (
-          <input
-            type="text"
-            value={editText}
-            onChange={(e) => setEditText(e.target.value)}
-            onBlur={saveText}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") saveText();
-            }}
-            autoFocus
-            className="absolute p-1 border border-gray-300 rounded text-black bg-white"
-            style={{ left: `${left}px`, top: `${top}px`, width: "200px" }}
-          />
+          <div 
+            className="absolute p-2 shadow-lg rounded-md bg-white border-2 border-gray-300"
+            style={{ left: `${left}px`, top: `${top}px`, width: "300px" }}
+          >
+            <div className="p-2 text-sm text-gray-600">
+              <span>请输入内容 (Shift+Enter换行, Enter确定)</span>
+            </div>
+            <textarea
+              value={editText}
+              onChange={(e) => setEditText(e.target.value)}
+              onBlur={saveText}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && e.shiftKey) {
+                  // 允许Shift+Enter换行
+                  return;
+                }
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  saveText();
+                }
+              }}
+              autoFocus
+              placeholder="在此输入文字..."
+              className="w-full p-3 text-black resize-none outline-none"
+              style={{ minHeight: "80px" }}
+              ref={(textArea) => {
+                if (textArea) {
+                  textArea.focus();
+                  // 只有在初始编辑时才将光标放在文本末尾，否则保持当前光标位置
+                  if (editText === shape.text || editText === "") {
+                    textArea.selectionStart = textArea.selectionEnd = editText.length;
+                  }
+                }
+              }}
+            />
+            <div className="flex justify-end">
+              <button 
+                onClick={saveText}
+                className="px-4 py-1 bg-gray-800 text-white rounded hover:bg-gray-600 transition-colors"
+              >
+                确定
+              </button>
+            </div>
+          </div>
         );
       })()}
       {selectedShape && (
